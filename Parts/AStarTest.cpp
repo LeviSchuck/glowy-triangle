@@ -24,13 +24,13 @@ void AStarTest::init(Screen * sc) {
     p.x = RANDOM() % sc->width;
     p.y = RANDOM() % sc->height;
     grid.setOrigin(p.x,p.y);
-    grid.setValue(p.x,p.y,0.0);
+    grid.clear(p.x,p.y);
 
     // Set Destination
     p.x = RANDOM() % sc->width;
     p.y = RANDOM() % sc->height;
     grid.setDestination(p.x,p.y);
-    grid.setValue(p.x,p.y,0.0);
+    grid.clear(p.x,p.y);
 }
 
 bool AStarTest::step(Screen * sc) {

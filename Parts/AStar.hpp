@@ -30,6 +30,7 @@ public:
     bool isOrigin(int,int);
     bool isDestination(int,int);
     bool isPathAt(int,int);
+    void clear(int,int);
 private:
     void setTopology(int,int,float);
     void setCost(int,int,float);

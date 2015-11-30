@@ -115,6 +115,13 @@ void AStarGrid::setDestination(int x, int y) {
     dest_y = y;
 }
 
+void AStarGrid::clear(int x, int y) {
+    if(x<0 || y<0 || x>=width || y>=height) return;
+    setValue(x,y,0.0);
+    setTopology(x,y,0.0);
+    setCost(x,y,0.0);
+}
+
 bool AStarGrid::isOrigin(int x, int y) {
     return (x == origin_x && y == origin_y);
 }
@@ -191,7 +198,7 @@ bool AStarGrid::pathStep() {
 
     // We've hit the end.
     if(segment.x == origin_x && segment.y == origin_y) return false;
-    
+
     // Prepare neighbor points to explore
     for(int i = 0; i < 4; i++) {
         ns[i] = segment;
