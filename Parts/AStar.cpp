@@ -6,9 +6,12 @@
 AStarGrid::AStarGrid() {
     grid = 0;
     topology = 0;
+    path = 0;
+    costs = 0;
 }
 
 void AStarGrid::init(int w, int h) {
+    cleanUp();
     width = w;
     height = h;
     grid = new float[w*h];
@@ -26,11 +29,20 @@ void AStarGrid::init(int w, int h) {
 }
 
 AStarGrid::~AStarGrid(){
+    cleanUp();
+}
+
+void AStarGrid::cleanUp(){
     if(grid) delete[] grid;
     grid = 0;
     if(topology) delete[] topology;
     topology = 0;
+    if(path) delete[] path;
+    path = 0;
+    if(costs) delete[] costs;
+    costs = 0;
 }
+
 
 void AStarGrid::setValue(int x, int y, float val) {
     if(x<0 || y<0 || x>=width || y>=height) return;

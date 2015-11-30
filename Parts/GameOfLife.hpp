@@ -10,6 +10,7 @@ public:
     int countNeighbors(int,int);
     bool isOnAt(int,int);
 private:
+    void cleanUp();
     bool * grid;
     int width;
     int height;

@@ -11,10 +11,16 @@ GameOfLife::GameOfLife(){
     grid = 0;
 }
 GameOfLife::~GameOfLife(){
-    if(grid) delete[] grid;
+    cleanUp();
 }
-void GameOfLife::init(Screen * s) {
+
+void GameOfLife::cleanUp() {
     if(grid) delete[] grid;
+    grid = 0;
+}
+
+void GameOfLife::init(Screen * s) {
+    cleanUp();
     int maxgrid = s->width * s->height;
     iters = 0;
     grid = new bool[maxgrid];

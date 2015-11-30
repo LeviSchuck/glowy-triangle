@@ -16,6 +16,7 @@ public:
     AStarGrid();
     ~AStarGrid();
     void init(int,int);
+    void cleanUp();
     void setValue(int,int,float);
     void setInfinityAt(int,int);
     bool step();
