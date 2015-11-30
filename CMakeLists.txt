@@ -6,6 +6,8 @@ set(LIGHT_PARTS
 Parts/HotPlate.cpp
 Parts/Screen.cpp
 Parts/GameOfLife.cpp
+Parts/AStar.cpp
+Parts/AStarTest.cpp
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

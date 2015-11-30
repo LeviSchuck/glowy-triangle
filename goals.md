@@ -10,6 +10,9 @@ Goals:
 Algorithms:
 * HotPlate √
 * Game of Life √
+* A-star √
+* Snake
+
 
 
 
@@ -19,3 +22,10 @@ Later Goals:
 Algorithms:
 * Ping pong
 * An Attractor!
+* Rotating Hexagon
+* Number Counter
+* Ray Caster
+* Block shifts
+* Mandelbrot zoom
+
+inspirations: http://ascannerprogressive.tumblr.com/archive

@@ -55,7 +55,8 @@ bool HotPlate::step(Screen * sc) {
     float newValue = 0;
     float oldValue;
     float n,s,e,w,here;
-    float blue;
+    float color;
+    float intensity;
     float epsilon = 1.0/512.0;
     // use FLT_EPSILON to tell if there's a measureable change
     // in the hotplate
@@ -71,8 +72,10 @@ bool HotPlate::step(Screen * sc) {
             oldValue = sc->pixelAt(x,y)->value;
             if(fabs(newValue - oldValue) > epsilon) changes = true;
             sc->pixelAt(x,y)->value = newValue;
-            blue = 360 - ((1.0-newValue) * 60);
-            sc->pixelAt(x,y)->hue = blue;
+            color = 360 - (1.0-newValue) * 45;
+            intensity = 1 - (newValue * newValue);
+            sc->pixelAt(x,y)->hue = color;
+            sc->pixelAt(x,y)->saturation = intensity;
 
         }
     }

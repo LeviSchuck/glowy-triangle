@@ -20,7 +20,8 @@ void HSVtoRGB( float *r, float *g, float *b, float h, float s, float v )
         *r = *g = *b = v;
         return;
     }
-    if(h >= 360) h -= 360;
+    if(h >= 360.0) h -= 360.0;
+    if(h < 0.0) h += 360.0;
 
     h /= 60;            // sector 0 to 5
     i = floor( h );

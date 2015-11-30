@@ -13,7 +13,6 @@ struct Point {
 };
 
 struct Screen {
-public:
     Screen(int,int);
     ~Screen();
     Pixel * pixels;
