@@ -10,6 +10,7 @@
 #include "Parts/HotPlate.hpp"
 #include "Parts/GameOfLife.hpp"
 #include "Parts/AStarTest.hpp"
+#include "Parts/Snake.hpp"
 
 
 
@@ -38,22 +39,24 @@ int main(){
         //Algorithm * a = new HotPlate();
         //Algorithm * a = new GameOfLife();
         // Randomly select an algorithm
-        alg = RANDOM() % 3;
+        alg = RANDOM() % 4;
+        alg = 9999; // Fix to current one
         switch(alg) {
             case 0: a = new HotPlate(); break;
             case 1: a = new GameOfLife(); break;
             case 2: a = new AStarTest(); break;
+            case 3: a = new Snake(); break;
 
-            //default: a = new AStarTest(); break;
+            default: a = new Snake(); break;
         }
 
         a->init(&s);
-        putTermColor(&s);
-        while(a->step(&s)) {
+        do {
             putTermColor(&s);
             usleep(40 * 1000);
             //sleep(1);
-        }
+        } while(a->step(&s));
+        putTermColor(&s);
         sleep(1);
         delete a;
     }

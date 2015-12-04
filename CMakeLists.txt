@@ -8,8 +8,11 @@ Parts/Screen.cpp
 Parts/GameOfLife.cpp
 Parts/AStar.cpp
 Parts/AStarTest.cpp
+Parts/Snake.cpp
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_executable(lights main.cpp color.cpp ${LIGHT_PARTS})
+set_property(TARGET lights PROPERTY CXX_STANDARD 11)
+set_property(TARGET lights PROPERTY CXX_STANDARD_REQUIRED ON)

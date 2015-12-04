@@ -1,5 +1,5 @@
 #pragma once
-#include "Algorithm.hpp"
+#include "Parts/Algorithm.hpp"
 
 class GameOfLife : public Algorithm {
 public:

@@ -1,25 +1,15 @@
 Currently Coding for a light controller!
 
 Goals:
-* Create a screen matrix √
-* Create color output √
-* Data init / reset √
-* Create algorithm wrapper √
-* Use color output √
+* Make Snake algorithm based on A-Star
 
 Algorithms:
 * HotPlate √
 * Game of Life √
 * A-star √
-* Snake
+* Snake √
 
-
-
-
-Later Goals:
-* Prep for Arduino use
-
-Algorithms:
+Later Algorithms:
 * Ping pong
 * An Attractor!
 * Rotating Hexagon
