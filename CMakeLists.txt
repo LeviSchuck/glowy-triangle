@@ -13,6 +13,11 @@ Parts/Snake.cpp
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+# add_definitions(-std=c++11)
+	SET(CMAKE_CXX_FLAGS "-std=c++0x")
+endif()
+
 add_executable(lights main.cpp color.cpp ${LIGHT_PARTS})
 set_property(TARGET lights PROPERTY CXX_STANDARD 11)
 set_property(TARGET lights PROPERTY CXX_STANDARD_REQUIRED ON)

@@ -13,7 +13,7 @@ void AStarTest::init(Screen * sc) {
 
     Point p;
 
-    int walls = (RANDOM() % 15) + 1;
+    int walls = 20 + (RANDOM() % 45) + 1;
     for(int i = 0; i < walls; i++) {
         p.x = RANDOM() % sc->width;
         p.y = RANDOM() % sc->height;

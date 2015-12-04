@@ -17,22 +17,23 @@
 
 void putTermColor(Screen * s) {
     float r,g,b;
+    printf("\033[1;1H");
     for(int x = 0; x < s->width; x++) {
         for(int y = 0; y < s->height; y++) {
             Pixel * p = s->pixelAt(x,y);
             HSVtoRGB(&r,&g,&b,p->hue,p->saturation,p->value);
             colorSpace(r*255,g*255,b*255);
         }
-        colorSpace(0,0,0);
+        resetColor();
         printf("\n");
     }
-    printf("\n");
 }
 
 int main(){
     int alg;
     SEEDRANDOM;
     while(true) {
+        clearScreen();
         printf("New Try\n");
         Screen s(10,10);
         Algorithm * a;
@@ -47,13 +48,13 @@ int main(){
             case 2: a = new AStarTest(); break;
             case 3: a = new Snake(); break;
 
-            default: a = new Snake(); break;
+            default: a = new AStarTest(); break;
         }
 
         a->init(&s);
         do {
             putTermColor(&s);
-            usleep(40 * 1000);
+            usleep(80 * 1000);
             //sleep(1);
         } while(a->step(&s));
         putTermColor(&s);

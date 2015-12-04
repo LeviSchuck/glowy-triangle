@@ -7,7 +7,10 @@ void colorSpace(int r, int g, int b) {
     printf("\x1b[48;2;%d;%d;%dm   ",r,g,b);
 }
 void resetColor() {
-    printf("\x1b[0m\n");
+    printf("\x1b[0m");
+}
+void clearScreen() {
+    printf("\033[2J");
 }
 
 // From https://www.cs.rit.edu/~ncs/color/t_convert.html

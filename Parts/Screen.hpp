@@ -28,7 +28,11 @@ struct Point {
         x = p1;
         y = p2;
     }
-    Point(Point p, int offset_x, int offset_y) : Point() {
+    Point(Point p, int offset_x, int offset_y)
+#ifdef __clang__
+    : Point()
+#endif
+{
         x = p.x + offset_x;
         y = p.y + offset_y;
     }
