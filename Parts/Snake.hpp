@@ -19,6 +19,7 @@ private:
     std::map<Point,int> tried;
     int tryFactor;
     int width, height;
+    int steps;
     Point food;
     std::list<Point> snake;
     

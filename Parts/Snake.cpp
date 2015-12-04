@@ -9,6 +9,7 @@ Snake::Snake() {
     width = 0;
     height = 0;
     tryFactor = 2;
+    steps = 0;
 }
 
 Snake::~Snake() {
@@ -22,6 +23,7 @@ void Snake::init(Screen * sc) {
     width = sc->width;
     height = sc->height;
     tryFactor = 2;
+    steps = 0;
 
     // Begin randomized generation
     {
@@ -53,7 +55,7 @@ void Snake::init(Screen * sc) {
     {
         // Place a couple walls.
 
-        int total = RANDOM() % 20;
+        int total = RANDOM() % 16;
         for(int i = 0; i < total; i++) {
             Point wall;
             wall.x = RANDOM() % width;
@@ -124,6 +126,7 @@ bool Snake::step(Screen * sc) {
 
 void Snake::makeFood(){
     bool satisfied = false;
+    steps = 0;
     tried.clear();
     while(!satisfied) {
         food.x = RANDOM() % width;
@@ -166,6 +169,7 @@ bool Snake::stepSnake() {
     g.init(width,height);
     head = snake.front();
     dest = head;
+    steps++;
 
     // set walls down
     for(const Point & p : walls) {
@@ -191,40 +195,44 @@ bool Snake::stepSnake() {
     else if(g.isPathAt(head.x,head.y-1)) dest.y--;
     else if(g.isPathAt(head.x,head.y+1)) dest.y++;
 
-    if( dest == head
-        // If we've been here, and the next step isn't empty
-        // we may be in an infinite loop
-        || (tried[dest] > tryFactor)
-        ) {
-        // So let's try something random, up to 20 times.
-        for(int i = 0; i < 20; i++) {
-            dest = head;
-            switch(RANDOM() % 4) {
-                case 0: dest.y--; break;
-                case 1: dest.x++; break;
-                case 2: dest.y++; break;
-                case 3: dest.x--; break;
+    if(!g.isDestination(dest.x,dest.y)) {
+        if( dest == head
+            // If we've been here, and the next step isn't empty
+            // we may be in an infinite loop
+            || (tried[dest] > tryFactor)
+            || !isEmpty(g,dest)
+            || tryFactor > snake.size() * 5
+            ) {
+            // So let's try something random, up to 20 times.
+            for(int i = 0; i < 20; i++) {
+                dest = head;
+                switch(RANDOM() % 4) {
+                    case 0: dest.y--; break;
+                    case 1: dest.x++; break;
+                    case 2: dest.y++; break;
+                    case 3: dest.x--; break;
+                }
+                if(isEmpty(g,dest)) break;
             }
-            if(isEmpty(g,dest)) break;
+            tryFactor++;
         }
-        tryFactor++;
-    }
-    if(tryFactor > 8) {
-        // Reset our attempts at trying
-        tryFactor = 2;
-        tried.clear();
-    }
+        if(tryFactor > 100) {
+            // Reset our attempts at trying
+            tryFactor = 2;
+            tried.clear();
+        }
 
 
-    // We lost
-    if(dest == head) return false;
-    if(!isEmpty(g,dest)) return false;
+        // We lost
+        if(dest == head) return false;
+        if(!isEmpty(g,dest)) return false;
+    }
 
     // Add to the snake
     snake.push_front(dest);
 
     // Did we not get food?
-    if(g.isDestination(dest.x,dest.y)) makeFood();
+    if(g.isDestination(dest.x,dest.y) || steps % 100 == 99) makeFood();
     else snake.pop_back();
     tried[dest]++;
     
