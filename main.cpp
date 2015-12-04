@@ -40,7 +40,7 @@ int main(){
         //Algorithm * a = new GameOfLife();
         // Randomly select an algorithm
         alg = RANDOM() % 4;
-        alg = 9999; // Fix to current one
+        //alg = 9999; // Fix to current one
         switch(alg) {
             case 0: a = new HotPlate(); break;
             case 1: a = new GameOfLife(); break;
