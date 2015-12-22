@@ -9,6 +9,9 @@ public:
     virtual bool step(Screen*);
     int countNeighbors(int,int);
     bool isOnAt(int,int);
+    virtual int stepDelay() {
+        return 100;
+    }
 private:
     void cleanUp();
     bool * grid;

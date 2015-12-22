@@ -12,6 +12,9 @@ public:
     ~Snake();
     virtual void init(Screen*);
     virtual bool step(Screen*);
+    virtual int stepDelay() {
+        return 80;
+    }
 private:
     void makeFood();
     bool stepSnake();

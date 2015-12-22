@@ -7,6 +7,9 @@ public:
     AStarTest();
     virtual void init(Screen*);
     virtual bool step(Screen*);
+    virtual int stepDelay() {
+      return 60;
+    }
 private:
     AStarGrid grid;
     bool foundPath;

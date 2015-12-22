@@ -84,7 +84,7 @@ int main(){
         a->init(&s);
         do {
             putTermColor(&s);
-            usleep(80 * 1000);
+            usleep(a->stepDelay() * 1000);
             //sleep(1);
         } while(a->step(&s));
         putTermColor(&s);
