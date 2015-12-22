@@ -29,19 +29,46 @@ void putTermColor(Screen * s) {
     }
 }
 
+void customRANDOM(){
+    char * s;
+    s = getenv("RAND");
+    if(s == 0) {
+        SEEDRANDOM;
+        forceRANDOM();
+    } else {
+        int r = atoi(s);
+        srand(r);
+    }
+}
+void forceRANDOM() {
+    char * s;
+    s = getenv("FRAND");
+    if(s != 0) {
+        int r = atoi(s);
+        srand(r);
+    }
+}
+
+void forceAlgorithm(int * alg) {
+    char * s;
+    s = getenv("FALG");
+    if(s != 0) {
+        *alg = atoi(s);
+    }
+} 
+
 int main(){
     int alg;
-    SEEDRANDOM;
+    customRANDOM();
     while(true) {
         clearScreen();
         printf("New Try\n");
+        forceRANDOM();
         Screen s(10,10);
         Algorithm * a;
-        //Algorithm * a = new HotPlate();
-        //Algorithm * a = new GameOfLife();
         // Randomly select an algorithm
         alg = RANDOM() % 4;
-        //alg = 9999; // Fix to current one
+        forceAlgorithm(&alg);
         switch(alg) {
             case 0: a = new HotPlate(); break;
             case 1: a = new GameOfLife(); break;

@@ -224,6 +224,7 @@ bool AStarGrid::pathStep() {
         if(ns[i].x < 0 || ns[i].x >= width) continue;
         if(ns[i].y < 0 || ns[i].y >= height) continue;
         if(topologyAt(ns[i].x,ns[i].y) == 0.0) continue;
+        if(isInfiniteAt(ns[i].x,ns[i].y)) continue;
 
         ns[i].priority = costAt(ns[i].x,ns[i].y);
         paths.push(ns[i]);
