@@ -28,6 +28,15 @@ void putTermColor(Screen * s) {
         printf("\n");
     }
 }
+void forceRANDOM() {
+    char * s;
+    s = getenv("FRAND");
+    if(s != 0) {
+        int r = atoi(s);
+        srand(r);
+    }
+}
+
 
 void customRANDOM(){
     char * s;
@@ -36,14 +45,6 @@ void customRANDOM(){
         SEEDRANDOM;
         forceRANDOM();
     } else {
-        int r = atoi(s);
-        srand(r);
-    }
-}
-void forceRANDOM() {
-    char * s;
-    s = getenv("FRAND");
-    if(s != 0) {
         int r = atoi(s);
         srand(r);
     }
@@ -59,10 +60,12 @@ void forceAlgorithm(int * alg) {
 
 int main(){
     int alg;
+    int run = 0;
     customRANDOM();
     while(true) {
+        run++;
         clearScreen();
-        printf("New Try\n");
+        printf("- Run %d -\n",run);
         forceRANDOM();
         Screen s(10,10);
         Algorithm * a;
