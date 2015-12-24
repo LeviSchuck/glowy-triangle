@@ -11,6 +11,7 @@
 #include "Parts/GameOfLife.hpp"
 #include "Parts/AStarTest.hpp"
 #include "Parts/Snake.hpp"
+#include "Parts/CornellBox.hpp"
 
 
 
@@ -21,7 +22,13 @@ void putTermColor(Screen * s) {
     for(int x = 0; x < s->width; x++) {
         for(int y = 0; y < s->height; y++) {
             Pixel * p = s->pixelAt(x,y);
-            HSVtoRGB(&r,&g,&b,p->hue,p->saturation,p->value);
+            if(p->isRGB) {
+                r = p->red;
+                g = p->green;
+                b = p->blue;
+            } else {
+                HSVtoRGB(&r,&g,&b,p->hue,p->saturation,p->value);
+            }
             colorSpace(r*255,g*255,b*255);
         }
         resetColor();
@@ -58,27 +65,38 @@ void forceAlgorithm(int * alg) {
     }
 } 
 
+int getSize() {
+    char * s;
+    s = getenv("PIXELS");
+    if(s != 0) {
+        return atoi(s);
+    }
+    return 8;
+}
+
 int main(){
     int alg;
     int run = 0;
+    int size = getSize();
     customRANDOM();
     while(true) {
         run++;
         clearScreen();
         printf("- Run %d -\n",run);
         forceRANDOM();
-        Screen s(10,10);
+        Screen s(size,size);
         Algorithm * a;
         // Randomly select an algorithm
-        alg = RANDOM() % 4;
+        alg = RANDOM() % 5;
         forceAlgorithm(&alg);
         switch(alg) {
             case 0: a = new HotPlate(); break;
             case 1: a = new GameOfLife(); break;
             case 2: a = new AStarTest(); break;
             case 3: a = new Snake(); break;
+            case 4: a = new CornellBox(); break;
 
-            default: a = new AStarTest(); break;
+            default: a = new CornellBox(); break;
         }
 
         a->init(&s);

@@ -9,6 +9,8 @@ Parts/GameOfLife.cpp
 Parts/AStar.cpp
 Parts/AStarTest.cpp
 Parts/Snake.cpp
+Parts/SmallPT.cpp
+Parts/CornellBox.cpp
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

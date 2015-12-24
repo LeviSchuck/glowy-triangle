@@ -4,7 +4,54 @@ struct Pixel {
     float hue;
     float saturation;
     float value;
+    float red;
+    float green;
+    float blue;
     bool masked;
+    bool isRGB;
+    Pixel() {
+        clear();
+    }
+    Pixel(float h, float s, float v) {
+        hue = h;
+        saturation = s;
+        value = v;
+        masked = false;
+        isRGB = false;
+    }
+    Pixel(int r, int g, int b) {
+        red = r / 255;
+        green = g / 255;
+        blue = b / 255;
+        isRGB = true;
+        masked = false;
+    }
+    Pixel(const Pixel & other) {
+        hue = other.hue;
+        saturation = other.saturation;
+        value = other.value;
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        masked = other.masked;
+        isRGB = other.isRGB;
+    }
+    Pixel & operator=(const Pixel & other) {
+        hue = other.hue;
+        saturation = other.saturation;
+        value = other.value;
+        red = other.red;
+        green = other.green;
+        blue = other.blue;
+        masked = other.masked;
+        isRGB = other.isRGB;
+        return *this;
+    }
+    void clear() {
+        hue = saturation = value = red = green = blue = 0;
+        masked = false;
+        isRGB = false;
+    }
 };
 
 struct Point {

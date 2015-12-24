@@ -1,3 +1,7 @@
+#include <cstdlib>
+
+#pragma once
+
 #define RANDOM rand
 #define SEEDRANDOM srand (time(NULL));
 // For Arduino

@@ -1,10 +1,20 @@
 #include <cstdio>
 #include <cmath>
+#include <cstdlib>
 
 #include "color.h"
 
 void colorSpace(int r, int g, int b) {
-    printf("\x1b[48;2;%d;%d;%dm   ",r,g,b);
+    int rep = 3;
+    printf("\x1b[48;2;%d;%d;%dm",r,g,b);
+    char * count = getenv("SWIDTH");
+    if(count != 0) {
+        rep = atoi(count);
+    }
+
+    for(int i = 0; i < rep; i++) {
+        printf(" ");
+    }
 }
 void resetColor() {
     printf("\x1b[0m");
